@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-n)v(=1%#rdu73vm)04%_n1bxujc%h=^3(&+x@mo)(q#_z-ke^z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','django-webapp-99a56e70a4a5.herokuapp.com']
 
 
 # Application definition
@@ -119,6 +120,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = os.join(BASE_DIR,'staticfiles')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -144,5 +147,6 @@ AWS_DYNAMODB_TABLE_NAME = 'VideoSubtitles'
 AWS_REGION_NAME = 'us-east-2' 
 
 DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
 
 
