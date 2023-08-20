@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video App</title>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f5f7fb;
+        }
+        .confirmation-wrapper {
+            background: white;
+            padding: 48px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h3 {
+            font-weight: 600;
+            color: #07074d;
+            margin-bottom: 20px;
+        }
+        a {
+            text-decoration: none;
+            color: #6a64f1;
+            border: 1px solid #e0e0e0;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.2s, color 0.2s;
+            display: inline-block;
+            margin: 10px;
+        }
+        a:hover {
+            background-color: #6a64f1;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="confirmation-wrapper">
+    <h3>Welcome to the Web App</h3>
+    <p>
+        <a href="{% url 'search_videos' %}">Search Videos</a>
+        <a href="{% url 'upload_video' %}">Upload Video</a>
+    </p>
+</div>
+
+</body>
+</html>

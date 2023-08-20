@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Video</title>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            padding: 48px;
+            background-color: #f5f7fb;
+        }
+
+        .upload-wrapper {
+            max-width: 550px;
+            padding: 24px;
+            background-color: white;
+            margin: 0 auto;
+            border-radius: 4px;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .upload-wrapper form div {
+            margin-bottom: 16px;
+        }
+
+        .upload-wrapper label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .upload-wrapper input[type="email"], 
+        .upload-wrapper input[type="file"], 
+        .upload-wrapper input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+        }
+
+        .upload-wrapper button {
+            padding: 8px 16px;
+            border: none;
+            background-color: #6a64f1;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .upload-wrapper button:hover {
+            background-color: #554fc8;
+        }
+    </style>
+</head>
+<body>
+
+<div class="upload-wrapper">
+    <form action="{% url 'upload_video' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+</div>
+
+</body>
+</html>
