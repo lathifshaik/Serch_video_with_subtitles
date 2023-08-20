@@ -7,6 +7,7 @@ import boto3
 from django.conf import settings
 from .forms import VideoUploadForm
 import os
+import tempfile
 from boto3.dynamodb.conditions import Attr
 
 
@@ -30,13 +31,21 @@ def upload_video(request):
     if request.method == "POST":
         form = VideoUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            video = form.save(commit=False)
-            # Use the temporary file path, which is in-memory or temporarily on disk.
-            video_path = video.video_file.temporary_file_path()
+            uploaded_file = request.FILES['video_file']
+            video_id = uploaded_file.name.split('.')[0]  # Extract the video ID
+            # Create a temporary file path
+            tmp_file_path = os.path.join(tempfile.gettempdir(), uploaded_file.name)
+            # Stream to the temporary file
+            with open(tmp_file_path, 'wb+') as destination:
+                for chunk in uploaded_file.chunks():
+                    destination.write(chunk)
             # Process the video
-            process_video(video_path)
+            process_video(tmp_file_path, video_id)
+            # Remove the temporary file after processing
+            os.remove(tmp_file_path)
 
             return render(request, 'videoapp/uploded.html')
+
     else:
         form = VideoUploadForm()
 
