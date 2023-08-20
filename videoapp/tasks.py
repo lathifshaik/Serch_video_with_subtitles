@@ -20,8 +20,9 @@ table = dynamodb.Table('VideoSubtitles')
 
 
 
-def process_video(video_path, video_id):
-    
+def process_video(video_path):
+    video_filename = os.path.basename(video_path)
+    video_id, _ = os.path.splitext(video_filename)
     # Extract subtitles using ccextractor
     output_file = f"{video_id}.srt"
     subprocess.run(['videoapp/CCExtractor_win_portable/ccextractor', video_path, '-o', output_file])
