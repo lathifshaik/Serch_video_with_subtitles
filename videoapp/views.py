@@ -31,26 +31,16 @@ def upload_video(request):
     if request.method == "POST":
         form = VideoUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            uploaded_file = request.FILES['video_file']
-            video_id = uploaded_file.name.split('.')[0]  # Extract the video ID
-            # Create a temporary file path
-            tmp_file_path = os.path.join(tempfile.gettempdir(), uploaded_file.name)
-            # Stream to the temporary file
-            with open(tmp_file_path, 'wb+') as destination:
-                for chunk in uploaded_file.chunks():
-                    destination.write(chunk)
-            # Process the video
-            process_video(tmp_file_path, video_id)
-            # Remove the temporary file after processing
-            os.remove(tmp_file_path)
-
+            video = form.save()
+            # Construct the path to the video file
+            video_path = os.path.join( str(video.video_file))
+            # Queue the video for processing 
+            process_video(video_path)
             return render(request, 'videoapp/uploded.html')
-
     else:
         form = VideoUploadForm()
 
     return render(request, 'videoapp/upload.html', {'form': form})
-
 
 
 def search_videos(request):
