@@ -30,11 +30,12 @@ def upload_video(request):
     if request.method == "POST":
         form = VideoUploadForm(request.POST, request.FILES)
         if form.is_valid():
-            video = form.save()
-            # Construct the path to the video file
-            video_path = os.path.join( str(video.video_file))
-            # Queue the video for processing 
+            video = form.save(commit=False)
+            # Use the temporary file path, which is in-memory or temporarily on disk.
+            video_path = video.video_file.temporary_file_path()
+            # Process the video
             process_video(video_path)
+
             return render(request, 'videoapp/uploded.html')
     else:
         form = VideoUploadForm()
