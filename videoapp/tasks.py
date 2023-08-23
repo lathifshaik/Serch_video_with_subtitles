@@ -26,7 +26,7 @@ def process_video(video_path):
     
     # Extract subtitles using ccextractor
     output_file = f"{video_id}.srt"
-    subprocess.run(['videoapp/CCExtractor_win_portable/ccextractorwinfull.exe', video_path, '-o', output_file])
+    subprocess.run(['videoapp/CCExtractor_win_portable/ccextractor', video_path, '-o', output_file])
     
     # Upload video to S3
     s3.Bucket('videoapp-django').upload_file(video_path, f"videos/{video_id}.mp4")
