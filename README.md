@@ -15,7 +15,7 @@ This platform offers users the capability to upload videos and then search throu
 ### Prerequisites
 - Python 3.11.3
 - Django 4.2.4
-
+### for linux version https://github.com/lathifshaik/Serch_video_with_subtitles/tree/fixed
 ### Installation
 1. Clone this repository:
    ```sh
